@@ -92,6 +92,8 @@ import me.bmax.apatch.ui.component.ConfirmResult
 import me.bmax.apatch.ui.component.KPModuleRemoveButton
 import me.bmax.apatch.ui.component.LoadingDialogHandle
 import me.bmax.apatch.ui.component.ProvideMenuShape
+import me.bmax.apatch.ui.component.WallpaperAwareDropdownMenu
+import me.bmax.apatch.ui.component.WallpaperAwareDropdownMenuItem
 import me.bmax.apatch.ui.component.rememberConfirmDialog
 import me.bmax.apatch.ui.component.rememberLoadingDialog
 import me.bmax.apatch.ui.viewmodel.KPModel
@@ -205,39 +207,37 @@ fun KPModuleScreen(navigator: DestinationsNavigator) {
                     )
                 }
 
-                ProvideMenuShape(RoundedCornerShape(10.dp)) {
-                    DropdownMenu(
-                        expanded = expanded,
-                        onDismissRequest = { expanded = false },
-                        properties = PopupProperties(focusable = true)
-                    ) {
-                        options.forEach { label ->
-                            DropdownMenuItem(text = { Text(label) }, onClick = {
-                                expanded = false
-                                when (label) {
-                                    moduleEmbed -> {
-                                        navigator.navigate(PatchesDestination(PatchesViewModel.PatchMode.PATCH_AND_INSTALL))
-                                    }
+                WallpaperAwareDropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false },
+                    shape = RoundedCornerShape(10.dp)
+                ) {
+                    options.forEach { label ->
+                        WallpaperAwareDropdownMenuItem(text = { Text(label) }, onClick = {
+                            expanded = false
+                            when (label) {
+                                moduleEmbed -> {
+                                    navigator.navigate(PatchesDestination(PatchesViewModel.PatchMode.PATCH_AND_INSTALL))
+                                }
 
-                                    moduleInstall -> {
+                                moduleInstall -> {
 //                                        val intent = Intent(Intent.ACTION_GET_CONTENT)
 //                                        intent.type = "application/zip"
 //                                        selectZipLauncher.launch(intent)
-                                        Toast.makeText(
-                                            context,
-                                            "Under development",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
-
-                                    moduleLoad -> {
-                                        val intent = Intent(Intent.ACTION_GET_CONTENT)
-                                        intent.type = "*/*"
-                                        selectKpmLauncher.launch(intent)
-                                    }
+                                    Toast.makeText(
+                                        context,
+                                        "Under development",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
-                            })
-                        }
+
+                                moduleLoad -> {
+                                    val intent = Intent(Intent.ACTION_GET_CONTENT)
+                                    intent.type = "*/*"
+                                    selectKpmLauncher.launch(intent)
+                                }
+                            }
+                        })
                     }
                 }
             }
