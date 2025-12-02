@@ -418,12 +418,16 @@ fun KpmAutoLoadConfigScreen(navigator: DestinationsNavigator) {
     // 首次使用提示对话框
     if (showFirstTimeDialog) {
         BasicAlertDialog(
-            onDismissRequest = { 
+            onDismissRequest = {
                 if (dontShowAgain) {
                     KpmAutoLoadManager.setFirstTimeShown(context)
                 }
-                showFirstTimeDialog = false 
-            }
+                showFirstTimeDialog = false
+            },
+            properties = androidx.compose.ui.window.DialogProperties(
+                dismissOnClickOutside = false,
+                dismissOnBackPress = false
+            )
         ) {
             Surface(
                 modifier = Modifier

@@ -332,4 +332,7 @@
     <string name="home_hide_su_path_summary">Ukryj ścieżkę pliku wykonywalnego su w karcie informacyjnej</string>
     <string name="home_hide_kpatch_version_summary">Ukryj wersję poprawki jądra w karcie informacyjnej</string>
     <string name="home_hide_fingerprint_summary">Ukryj odcisk palca w karcie informacyjnej</string>
+
+    <string name="kpm_page_first_time_title">Ostrzeżenie</string>
+    <string name="kpm_page_first_time_message">Moduły jądra bezpośrednio modyfikują implementację rozruchu (Boot). W przeciwieństwie do modułów systemowych, nie posiadają one dobrego mechanizmu ratunkowego. Jeśli pojawią się problemy, można je naprawić tylko wchodząc w tryb Fastboot. Zaleca się najpierw załadować moduł, aby upewnić się, że nie ma problemów przed osadzeniem go w Boot. Jeśli moduł może być używany tylko przez ładowanie, możesz wypróbować funkcję automatycznego ładowania modułów KPM. Jeśli nie rozumiesz modułów jądra, nie używaj tej funkcji!</string>
 </resources>

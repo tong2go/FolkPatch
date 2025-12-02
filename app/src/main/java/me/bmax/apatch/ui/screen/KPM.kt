@@ -92,6 +92,7 @@ import me.bmax.apatch.R
 import me.bmax.apatch.apApp
 import me.bmax.apatch.ui.component.ConfirmResult
 import me.bmax.apatch.ui.component.KPModuleRemoveButton
+import me.bmax.apatch.ui.component.KpmAutoLoadManager
 import me.bmax.apatch.ui.component.LoadingDialogHandle
 import me.bmax.apatch.ui.component.ProvideMenuShape
 import me.bmax.apatch.ui.component.WallpaperAwareDropdownMenu
@@ -110,6 +111,7 @@ private const val TAG = "KernelPatchModule"
 private lateinit var targetKPMToControl: KPModel.KPMInfo
 
 @Destination<RootGraph>
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun KPModuleScreen(navigator: DestinationsNavigator) {
     val state by APApplication.apStateLiveData.observeAsState(APApplication.State.UNKNOWN_STATE)
@@ -132,6 +134,10 @@ fun KPModuleScreen(navigator: DestinationsNavigator) {
     }
 
     val viewModel = viewModel<KPModuleViewModel>()
+
+    val context = LocalContext.current
+    var showFirstTimeDialog by remember { mutableStateOf(KpmAutoLoadManager.isFirstTimeKpmPage(context)) }
+    var dontShowAgain by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         if (viewModel.moduleList.isEmpty() || viewModel.isNeedRefresh) {
@@ -253,6 +259,75 @@ fun KPModuleScreen(navigator: DestinationsNavigator) {
                 .fillMaxSize(),
             state = kpModuleListState
         )
+    }
+
+    if (showFirstTimeDialog) {
+        BasicAlertDialog(
+            onDismissRequest = {
+                if (dontShowAgain) {
+                    KpmAutoLoadManager.setFirstTimeKpmPageShown(context)
+                }
+                showFirstTimeDialog = false
+            },
+            properties = androidx.compose.ui.window.DialogProperties(
+                dismissOnClickOutside = false,
+                dismissOnBackPress = false
+            )
+        ) {
+            Surface(
+                modifier = Modifier
+                    .width(350.dp)
+                    .padding(16.dp),
+                shape = RoundedCornerShape(20.dp),
+                tonalElevation = AlertDialogDefaults.TonalElevation,
+                color = AlertDialogDefaults.containerColor,
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(
+                        text = stringResource(R.string.kpm_page_first_time_title),
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.padding(bottom = 12.dp)
+                    )
+
+                    Text(
+                        text = stringResource(R.string.kpm_page_first_time_message),
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        androidx.compose.material3.Checkbox(
+                            checked = dontShowAgain,
+                            onCheckedChange = { dontShowAgain = it }
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = stringResource(R.string.kpm_autoload_do_not_show_again),
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        Button(onClick = {
+                            if (dontShowAgain) {
+                                KpmAutoLoadManager.setFirstTimeKpmPageShown(context)
+                            }
+                            showFirstTimeDialog = false
+                        }) {
+                            Text(stringResource(R.string.kpm_autoload_first_time_confirm))
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

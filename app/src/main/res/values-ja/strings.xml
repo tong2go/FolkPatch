@@ -287,4 +287,7 @@
     <string name="kpm_autoload_first_time_message">この機能により、起動時に設定されたすべてのKPMを一時的に自動読み込みできます。このアプローチは、カーネルに直接埋め込むよりも便利です。\n\n例えば、パーティションの変更を防ぐKPMは一時的にしか使用できず、埋め込むと起動失敗の原因になります。または、BOOTパーティションを変更したくない場合、この設定を使用してモジュールを迅速に読み込むことができます。\n\nコマンドが実行されるためには、アプリが完全に終了してから再起動することを確認してください。通常、起動時にも読み込まれます。マネージャーが一時的に黒くなるのは正常な現象です！</string>
     <string name="kpm_autoload_first_time_confirm">了解しました</string>
     <string name="kpm_autoload_do_not_show_again">今後表示しない</string>
+
+    <string name="kpm_page_first_time_title">警告</string>
+    <string name="kpm_page_first_time_message">カーネルモジュールはBootの実装を直接変更します。システムモジュールとは異なり、優れた救済措置がありません。問題が発生した場合、Fastbootに入って修復するしかありません。Bootに埋め込む前に、まずモジュールをロードして問題がないことを確認することをお勧めします。ロードして使用することしかできないモジュールの場合は、KPMモジュール自動ロード機能を試すことができます。カーネルモジュールについて理解していない場合は、この機能を使用しないでください！</string>
 </resources>

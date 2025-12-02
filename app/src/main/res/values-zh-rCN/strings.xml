@@ -333,4 +333,7 @@
     <string name="kpm_autoload_first_time_message">这个功能可以让你开机自动临时加载配置文件的全部KPM，这种方案相比于直接嵌入内核更加方便。\n\n例如，功能为防止分区被修改的KPM，这种KPM只能临时加载使用，但是嵌入会导致不开机。或者你不想破坏BOOT分区就可以使用这个配置快速载入模块。\n\n需要确保软件完全退出进入才会执行命令，一般来说开机进入也是会加载的，管理器黑屏一段时间属于正常现象！</string>
     <string name="kpm_autoload_first_time_confirm">知道了</string>
     <string name="kpm_autoload_do_not_show_again">不再显示</string>
+
+    <string name="kpm_page_first_time_title">警告</string>
+    <string name="kpm_page_first_time_message">内核模块是直接修改Boot的实现，它不像系统模块一样有很好的救砖机制，出问题只能进入Fastboot去修复。建议先加载模块没有问题再嵌入到Boot。如果是只能加载使用的模块，可以尝试使用自动KPM模块加载功能。如果你不了解内核模块，请不要使用本功能！</string>
 </resources>
