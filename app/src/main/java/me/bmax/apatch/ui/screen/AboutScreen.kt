@@ -68,8 +68,8 @@ fun AboutScreen(navigator: DestinationsNavigator) {
                 shape = CircleShape
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.icon),
-                    contentDescription = "icon",
+                    painter = painterResource(id = R.drawable.icon2),
+                    contentDescription = "icon2",
                     modifier = Modifier.scale(1.4f)
                 )
             }
