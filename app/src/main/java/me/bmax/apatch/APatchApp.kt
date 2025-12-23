@@ -218,6 +218,9 @@ class APApplication : Application(), Thread.UncaughtExceptionHandler, ImageLoade
                         return@thread
                     }
 
+                    // Refresh shell after becoming root
+                    APatchCli.refresh()
+
                     // KernelPatch version
                     //val buildV = Version.buildKPVUInt()
                     //val installedV = Version.installedKPVUInt()
