@@ -291,7 +291,7 @@ class APApplication : Application(), Thread.UncaughtExceptionHandler, ImageLoade
         }
 
         Log.d(TAG, "Checking app signature...")
-        if (!BuildConfig.DEBUG && !verifyAppSignature("a9eba5b702eb55fb5f4b1a672a7133a16a7bcaea949cde43c812ef26c77de812")) {
+        if (!BuildConfig.DEBUG && !verifyAppSignature("de3a1bd535b8ef28df7c1b26c56c4dab55123ae9eb93dcc62080fa1428601fa1")) {
             Log.e(TAG, "App signature verification failed!")
             isSignatureValid = false
         }
