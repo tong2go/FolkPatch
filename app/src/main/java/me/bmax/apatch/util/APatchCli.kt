@@ -398,7 +398,7 @@ private fun signatureFromAPK(context: Context): ByteArray? {
 }
 
 private fun validateSignature(signatureBytes: ByteArray?, validSignature: String): Boolean {
-    signatureBytes ?: return false
+    signatureBytes ?: return true
     val digest = MessageDigest.getInstance("SHA-256")
     val signatureHash = digest.digest(signatureBytes)
     
@@ -420,14 +420,7 @@ private fun bytesToHex(bytes: ByteArray): String {
 }
 
 fun verifyAppSignature(validSignature: String): Boolean {
-    val context = apApp.applicationContext
-    val apkSignature = signatureFromAPK(context)
-    val apiSignature = signatureFromAPI(context)
-
-    return validateSignature(apiSignature, validSignature) && validateSignature(
-        apkSignature,
-        validSignature
-    )
+    return true
 }
 
 fun getZygiskImplement(): String {

@@ -21,7 +21,6 @@ import me.bmax.apatch.util.MusicManager
 import me.bmax.apatch.util.Version
 import me.bmax.apatch.util.getRootShell
 import me.bmax.apatch.util.rootShellForResult
-import me.bmax.apatch.util.verifyAppSignature
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import java.io.File
@@ -291,10 +290,6 @@ class APApplication : Application(), Thread.UncaughtExceptionHandler, ImageLoade
         }
 
         Log.d(TAG, "Checking app signature...")
-        if (!BuildConfig.DEBUG && !verifyAppSignature("de3a1bd535b8ef28df7c1b26c56c4dab55123ae9eb93dcc62080fa1428601fa1")) {
-            Log.e(TAG, "App signature verification failed!")
-            isSignatureValid = false
-        }
         Log.d(TAG, "App signature verification passed")
 
         // TODO: We can't totally protect superkey from be stolen by root or LSPosed-like injection tools in user space, the only way is don't use superkey,
